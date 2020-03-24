@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>navigation.html</title>
+</head>
+
+<body>
+    <input type="text" name="firstName" id="firstName" value="gildong">
+    <input type="text" name="lastName" id="lastName" value="Hong">
+    <input type="text" name="age" id="age" value="16">
+    <button id="btn" onclick="translateBtn()">Click</button>
+    <table id="tb1" border="1">
+        <tbody>
+            <tr>
+                <td>FirstName</td>
+                <td>LastName</td>
+                <td>Age</td>
+            </tr>
+            <tr>
+                <td style="background-color: aqua;">junwon</td>
+                <td>Ha</td>
+                <td>26</td>
+            </tr>
+            <tr>
+                <td>gildong</td>
+                <td style="background-color: aqua;">Hong</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>jaeeon<p>firstname</p><p>firstname1</p></td>
+                <td>Yun</td>
+                <td style="background-color: aqua;">28</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        var tds = document.getElementsByTagName("td"); //태그네임으로 요소를 가져오겠다.\
+        console.log(tds);
+        console.log(tds[9].childNodes[1].childNodes[0].nodeValue); 
+        console.log(tds[9].childNodes[2].childNodes[0].nodeValue);
+        // jaeeon 찾으려면 childNodes[0].nodeValue
+
+        var tds1 = document.getElementsByTagName("tbody");
+        console.log(tds1);
+        console.log(tds1[0]);
+        console.log(tds1[0].childNodes[1].childNodes[1].firstChild.nodeValue);
+
+        var tds2 = document.getElementsByTagName("tr");
+        console.log(tds2)
+        tds2.onmouseover = function() {
+            
+        }
+
+        var btn = document.getElementById("btn");
+        console.log(btn);
+        btn.onmouseover = function() {
+            this.style.background = "yellow"
+            this.style.width = "100px"
+        }
+        btn.onmouseout = function() {
+            this.style.background = ""
+            this.style.width = "50px"
+        }
+
+        function translateBtn() {
+            var na1 = document.getElementById("firstName").value;
+            var na2 = document.getElementById("lastName").value;
+            var na3 = document.getElementById("age").value;
+            tds[3].childNodes[0].nodeValue = na1;
+            tds[7].childNodes[0].nodeValue = na2;
+            tds[11].childNodes[0].nodeValue = na3;
+            tds[9].childNodes[2].childNodes[0].nodeValue = na1;
+            // tds[9].childNodes[2].childNodes[1].childNodes[0].nodeValue = na1;
+            // tds[9].childNodes[1].childNodes[0].nodeValue = "lastName"; //클릭을 하면 firstname을 lastname으로 바꾸겠다
+            // tds[9].childNodes[1].childNodes[0].nodeValue = na; //firstname대신에 입력한 firstname이 들어간다.         
+            tds2[2].style.background = "yellow";
+            tds2[2].style.color = "green";
+        }
+
+
+        
+    </script>
+
+</body>
+
+</html>

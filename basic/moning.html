@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name = "firstName" id="firstName" value="gildong">
+    <input type="text" name = "lastName" id="lastName" value="Hong">
+    <input type="text" name="age" id="age" value=16>
+    <button id="btn" onclick="addTr()">Click</button>
+    <table id="tbl" border="1">
+        <tr>
+            <td>FirstName</td>
+            <td>LastName</td>
+            <td>Age</td>
+        </tr>
+        <tr>
+            <td>junwon</td>
+            <td>Ha</td>
+            <td>26</td>
+        </tr>
+    </table>
+
+    <script>
+        var tb1 = document.getElementById("tbl");
+
+        function addTr() {
+        var fName = document.getElementById('firstName').value; //id값을 적는다. id값을 가지고 요소를 가지고 오겠다.
+        var lName = document.getElementById('lastName').value;
+        var age = document.getElementById('age').value;
+        
+        var $tr, $td, $text;
+        $tr = document.createElement("tr"); //한번만
+
+        $text = document.createTextNode(fName); //할때마다 하나씩 만들어야함.
+        $td = document.createElement("td");
+        $td.appendChild($text); //자식을 부모에게 붙일때.
+        $tr.appendChild($td);
+
+        $text = document.createTextNode(lName);
+        $td = document.createElement("td");
+        $td.appendChild($text); 
+        $tr.appendChild($td);
+
+        $text = document.createTextNode(age);
+        $td = document.createElement("td");
+        $td.appendChild($text);
+        $tr.appendChild($td);
+
+        tbl.appendChild($tr)
+
+        var fName = document.getElementById('firstName').value = ""; //기존에 보여주던 gildong을 추가하고 나면 빈칸이 된다.
+        var fName = document.getElementById('lastName').value = ""; // 아무것도 안넣으면 화면을 지우겠다.
+        var fName = document.getElementById('age').value = ""; // 값을 입력하면 gildong을 추가하면 입력한 값이 적혀진다.
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn" onclick="addTable()">Click</button>
+    <table id="tbl" border="1">
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Age</th>
+        </tr>
+    </table>
+
+    <script>
+        var tbl = document.getElementById("tbl");
+
+        var members = [
+            { name: "Hong", Phone: "1212-1212", age: 20 },
+            { name: "Kim", Phone: "2323-3434", age: 23 },
+            { name: "Hwang", Phone: "1234-1234", age: 27 },
+            { name: "Lee", Phone: "3456-3423", age: 25 }
+        ]
+        function addTable() {
+
+            // var $titles = ["name", "phone", "age"];
+            var $text, $td, $tr;
+            for (obj of members) {
+                $tr = document.createElement("tr");
+                for (f in obj) {
+                    $text = document.createTextNode(obj[f]);
+                    $td = document.createElement("td");
+                    $td.appendChild($text);
+                    $tr.appendChild($td);
+                }
+                tbl.appendChild($tr)
+            }
+        }
+    </script>
+</body>
+
+</html>

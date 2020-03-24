@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn" onclick="addrList()">Btn</button>
+
+    <table id="tbl" border="1">
+        <tr style="background: orange; width: 3;">
+            <td>Name</td>
+            <td>Phone</td>
+            <td>Age</td>
+        </tr>
+
+    </table>
+    <script>
+        var tbl = document.getElementById("tbl");
+        var addrList = [
+            { name: "Hong", Phone: "1212-1212", age: 20 },
+            { name: "Kim", Phone: "1212-3434", age: 20 },
+            { name: "Hwang", Phone: "1234-1234", age: 20 },
+            { name: "Lee", Phone: "3456-3423", age: 20 }
+        ]
+
+        var $titles = ["name", "phone", "age"]; //obj를 고정시키기 위해.
+        var btn = document.getElementById("btn");
+        btn.onclick = function() {
+            var tbl = document.getElementById("tbl");
+            var $text, $td, $tr;
+            addrList.forEach(function (o) { 
+                //addrList라는 function에 forEach를 한다.
+                //forEach: for구문 o:object(한건한건), i: index(0,1,2,3)  지금 index없어서 생략가능, a: 배열전체
+                $tr = document.createElement("tr"); // <tr></tr>을 만듬
+                for (field of $titles) {
+                    $text = document.createTextNode(o[field]);
+                    $td = document.createElement("td");
+                    $td.appendChild($text);
+                    $tr.appendChild($td);
+                }
+                tbl.appendChild($tr); //<table><tr>......</tr></talbe>
+            });
+        }
+
+        // for(var i=0; i<addrList.length; i++) {
+        //     $tr = document.createElement("tr");
+        //     for(var j=0; j<$titles.length; j++){
+        //         $text = document.createTextNode(addrList[i][$titles[j]]);
+        //             $td = document.createElement("td");
+        //             $td.appendChild($text);
+        //             $tr.appendChild($td);
+        //     }
+        //     tbl.appendChild($tr);
+        // }
+        // }
+
+        // var addrList = '[{"name": "Hong", "Phone": "1212-1212", "age":12}]'
+        // console.log(JSON.stringify(JSON.parse(addrList)));
+    </script>
+
+</body>
+
+</html>
