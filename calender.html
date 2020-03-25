@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <div id="show"></div> -->
+    <input type="text" id="year" value=2020>
+    <input type="text" id="month">
+    <button id="btn">CreateCalender</button>
+    <script>
+        var btn = document.getElementById("btn");
+        btn.onclick = function () {
+            var yr = document.getElementById("year").value;
+            var mth = document.getElementById("month").value;
+            createCal(yr, mth);
+            // yr = document.getElementById("year").value = "";
+            // mth = document.getElementById("month").value = "";
+        }
+        function createCal(y, m) {
+            // 화면 clear
+            var tbl = document.getElementsByTagName("table");
+            if (tbl && tbl.length > 0 ){
+                tbl[0].remove();
+            }
+            //
+            var year = y;
+            var month = m;
+            var dday = new Date(year, month, 0); // 3월(2) 4월(3)
+            var tday = new Date(year, month-1, 1);
+            // console.log(month + "월의 마지막날: " + dday.getDate());
+            // var dday = new Date();
+            // console.log(dday.getDate());
+
+            var days = ["일", "월", "화", "수", "목", "금", "토"];
+            var $table, $tr, $td, $text
+            $table = document.createElement("table");
+            $table.setAttribute("border", 1);
+            // $table.setAttribute("style", "border-collapse: collapse;");
+            $tr = document.createElement("tr");
+            days.forEach(function (a, b) {
+                $td = document.createElement("td");
+                if (b == 0) {
+                    $td.style.background = "red";
+                    $td.style.color = "white";
+                }
+                if (b == 6) {
+                    $td.style.background = "blue";
+                    $td.style.color = "white";
+                }
+                $text = document.createTextNode(a);
+                $td.appendChild($text);
+                $tr.appendChild($td)
+            });
+            $table.appendChild($tr);
+            // var totalDay = 35;
+            $tr = document.createElement("tr");
+
+            var nullDay = tday.getDay(); //일(0), 월(1), 화(2),...,토(6)
+            for(var i = 0; i < nullDay; i++){
+                $td = document.createElement("td");
+                $text = document.createTextNode("");
+                $td.appendChild($text);
+                $tr.appendChild($td)
+            }
+            var totalDay = dday.getDate();
+            
+            for (var i = 1; i <= totalDay; i++) { //i=<totalDay
+                // var temp;
+                // if (i <= 31) {
+                //     temp = i;
+                // }
+                // else { temp = " " }
+                $td = document.createElement("td");
+                $text = document.createTextNode(i);
+                $td.appendChild($text);
+                $tr.appendChild($td)
+                if ((i+nullDay) % 7 == 1) {
+                    $td.style.background = "red"
+                    $td.style.color = "white";
+                }
+                if ((i+nullDay) % 7 == 0) {
+                    $td.style.background = "blue"
+                    $td.style.color = "white";
+                }
+                if ((i+nullDay) % 7 == 0) {
+                    $table.appendChild($tr);
+                    $tr = document.createElement("tr");
+                }
+            }
+
+            $table.appendChild($tr);
+            // document.getElementById("show").appendChild($table);
+            document.body.appendChild($table);
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eventHandler.html</title>
+</head>
+
+<body>
+    Eid: <input type="text" name="" id="empId"> <br>
+    Name: <input type="text" name="" id="name"> <br>
+    Phone: <input type="text" name="" id="phone"> <br>
+    <button id="btn" onclick="addTr()">Add Info</button>
+
+    <!-- <div>Eid: <input type="text" name="eid" id="empId"></div>
+    <div>Name: <input type="text" name="name" id="name"></div>
+    <div>Phone: <input type="text" name="phone" id="phone"> <button onclick="addTr()">Add Info</button></div>
+     -->
+
+    <table id="tbl">
+        <tr>
+            <th>empId</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Delete</th>
+        </tr>
+    </table>
+    <script>
+        var datas = [
+            { empId: 101, name: "scott", phone: "1111" },
+            { empId: 102, name: "seongwoo", phone: "2222" },
+            { empId: 103, name: "junwon", phone: "3333" },
+            { empId: 104, name: "jaeeon", phone: "4444" },
+            { empId: 105, name: "kyurim", phone: "5555" }
+        ]
+        var tbl = document.getElementById("tbl");
+        tbl.setAttribute("border", 1);
+        tbl.setAttribute("style", "border-collapse: collapse;");
+        var $tr, $td, $text;
+        var $title = ["empId", "name", "phone"];
+        datas.forEach(function (o, i) {
+
+            $tr = document.createElement("tr");
+            // $tr.addEventListener("click", clickFnc); //tr이 이벤트를 가져오도록
+            $tr.addEventListener("mouseover", mOverFnc);
+            $tr.addEventListener("mouseout", mOutFnc);
+
+            // $tr.setAttribute("style", "background-color:yellow");
+            // $tr.onmouseover = moverFunc;
+            // $tr.onmouseout = moutFunc;
+
+            $tr.setAttribute("id", o.empId); //<tr id="empId의 값"></tr>
+            //tr에 id를 설정한다. o의 empId가 셋팅
+            for (field of $title) {
+                $text = document.createTextNode(o[field]);
+                $td = document.createElement("td");
+                $td.appendChild($text); //<td>101</td>
+                $tr.appendChild($td); //<tr><td>101</td></tr>
+            }
+            //button 태그 생성, <td><button>Del</button></td>
+            $text = document.createTextNode("Del");
+            var $btn = document.createElement("button");
+            $btn.onclick = delFunc;
+            $btn.appendChild($text);
+            $td = document.createElement("td");
+            $td.appendChild($btn);
+            $tr.appendChild($td);
+
+            tbl.appendChild($tr);
+
+
+            //add 버튼을 누르면 처리하는 부분, 교수님이 하신거
+            // var addBtn = document.getElementById("btn")
+            // addBtn.addEventListener("click", addInfoFnc);
+
+            // function addInfoFnc() {
+            //     $tr = document.createElement("tr");
+            //     $tr.setAttribute("id", document.getElementById("empId"));
+            //     $tr.addEventListener("mouseover", mOverFnc);
+            //     $tr.addEventListener("mouseout", mOutFnc);
+            //     var inputs = document.querySelectorAll("input");
+            //     inputs.forEach(function(a){
+            //         $text = document.createTextNode(o[field]);
+            //         $td = document.createElement("td");
+            //         $td.appendChild($text); //<td>101</td>
+            //         $tr.appendChild($td); //<tr><td>101</td></tr>
+            //     });
+            //     //button 태그 생성, <td><button>Del</button></td>
+            //     $text = document.createTextNode("Del");
+            //     var $btn = document.createElement("button");
+            //     $btn.onclick = delFunc;
+            //     $btn.appendChild($text);
+            //     $td = document.createElement("td");
+            //     $td.appendChild($btn);
+            //     $tr.appendChild($td);
+
+            //     tbl.appendChild($tr);
+            // } 교수님 하신거.
+        });
+
+        function delFunc() {
+            // console.log("del"); //이벤트가 나오는지 확인
+            // console.log("this.parentNode.parentNode");
+            this.parentNode.parentNode.remove();
+            // id=101 값을 db에서 삭제처리
+        };
+
+        // function moverFunc() {
+        //     this.setAttribute("style", "background-color:yellow");
+        // }
+        // function moutFunc() {
+        //     this.setAttribute("style", "color: red");
+        // }
+
+        // function clickFnc() {
+        //     console.log(this.childNodes[0].childNodes[0].nodeValue);
+        //     var artMsg = "id: " + this.childNodes[0].childNodes[0].nodeValue
+        //                 + "\nname: " + this.childNodes[1].childNodes[0].nodeValue
+        //                 + "\nPhone: " + this.childNodes[2].childNodes[0].nodeValue;
+        //     alert(artMsg); 
+        // }
+
+        function mOverFnc() {
+            this.style.background = "yellow";
+        }
+        function mOutFnc() {
+            this.style.background = "";
+
+        }
+        //moning.html 참고, 내가 한거
+        function addTr() {
+            var empId = document.getElementById('empId').value;
+            var name = document.getElementById('name').value;
+            var phone = document.getElementById('phone').value;
+
+            var $tr, $td, $text
+            $tr = document.createElement("tr");
+            $tr.addEventListener("mouseover", mOverFnc);
+            $tr.addEventListener("mouseout", mOutFnc);
+
+            $text = document.createTextNode(empId);
+            $td = document.createElement("td");
+            $td.appendChild($text); //자식을 부모에게 붙일때.
+            $tr.appendChild($td);
+
+            $text = document.createTextNode(name);
+            $td = document.createElement("td");
+            $td.appendChild($text);
+            $tr.appendChild($td);
+
+            $text = document.createTextNode(phone);
+            $td = document.createElement("td");
+            $td.appendChild($text);
+            $tr.appendChild($td);
+
+            tbl.appendChild($tr)
+
+            $text = document.createTextNode("Del");
+            var $btn = document.createElement("button");
+            $btn.onclick = delFunc;
+            $btn.appendChild($text);
+            $td = document.createElement("td");
+            $td.appendChild($btn);
+            $tr.appendChild($td);
+
+            tbl.appendChild($tr);
+
+            var empId = document.getElementById('empId').value = "";
+            var name = document.getElementById('name').value = "";
+            var phone = document.getElementById('phone').value = "";
+        }
+
+    </script>
+</body>
+
+</html>

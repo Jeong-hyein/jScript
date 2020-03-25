@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            float: left;
+            border: 2px blue solid;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 단축: div*8 -->
+    <div onclibk="alert(1)">1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <button id="btn">MouseClick</button>
+
+    <script>
+        // var btns = document.getElementById("btn");
+        // btns.onclick = function(){
+        //     alert(this.innerHTML); //alert가 클릭하면 작은 창뜨는 옵션인듯
+        // }
+
+        var $divs = document.getElementsByTagName("div"); //$divs라는 변수에 div 8개가 담겨있다.
+        console.log($divs); //결과: HTMLCollection(8)
+        // $divs = document.querySelectorAll("div"); //querySelectorAll을 사용하면 forEach를 사용가능
+        // $divs.forEach(function (a) { //forEach는 배열에서 사용
+        //     a.setAttribute("style", "background-color:yellow");
+        // })
+
+        // for(var i=0; i<$divs.length; i++) {
+        //     $divs[i].setAttribute("style", "background-color:yellow"); //각각의 요소에 속성을 부여
+        //     $divs[i].onmouseover = function() {
+        //         this.setAttribute("style", "color: red");
+        //         // this.setAttribute("style", "background-color: pink");
+        //     }
+        //     $divs[i].onmouseout = function() {
+        //         this.setAttribute("style", "background-color:yellow");
+        //     }
+        //     $divs[i].onclick = function() {
+        //         alert(this.innerHTML);
+        //     }   
+        // }
+        var $divs2 = document.querySelectorAll("div");
+        $divs2.forEach(function (a) {
+            a.setAttribute("style", "background-color:yellow");
+            a.onmouseover = function () {
+                this.setAttribute("style", "color: red");
+            }
+            a.onmouseout = function () {
+                this.setAttribute("style", "background-color:yellow");
+            }
+            a.onclick = function () {
+                alert(this.innerHTML);
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
